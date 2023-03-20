@@ -61,6 +61,6 @@ const MONGODB_URI =
 
 mongoose.connect(MONGODB_URI).then(
     result =>{
-        app.listen(process.env.PORT ||8080);
+        app.listen(process.env.PORT ||3000);
     }
 ).catch(err => console.log(err))
