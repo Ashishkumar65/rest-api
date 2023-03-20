@@ -1,3 +1,6 @@
+const dotenv = require('dotenv');
+dotenv.config({path:'./config.env'})
+
 const express = require('express');
 const mongoose = require('mongoose');
 const bodyParser = require('body-parser');
@@ -53,9 +56,11 @@ app.use((error,req,res,next)=>{
     const data= error.data
     res.status(status).json({message: message, data: data});
 })
+const MONGODB_URI =
+  `mongodb+srv://${process.env.MONGO_USER}:${process.env.MONGO_PASSWORD}@cluster0.1gtp6ct.mongodb.net/${process.env.MONGO_DEFAULT_DATABASE}`;
 
-mongoose.connect('mongodb+srv://ashish:s6sbeId2m6znHs5x@cluster0.1gtp6ct.mongodb.net/messages').then(
+mongoose.connect(MONGODB_URI).then(
     result =>{
-        app.listen(8080);
+        app.listen(process.env.PORT ||8080);
     }
 ).catch(err => console.log(err))
